@@ -1,0 +1,11 @@
+{
+  "type": "atmosphericraft:freeze_recipe",
+  "ingredients": [
+    {
+      "item": "minecraft:porkchop"
+    }
+  ],
+  "output": {
+    "item": "atmosphericraft:frozen_porkchop"
+  }
+}

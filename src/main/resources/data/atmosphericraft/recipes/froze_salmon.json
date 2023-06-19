@@ -1,0 +1,11 @@
+{
+  "type": "atmosphericraft:freeze_recipe",
+  "ingredients": [
+    {
+      "item": "minecraft:salmon"
+    }
+  ],
+  "output": {
+    "item": "atmosphericraft:frozen_salmon"
+  }
+}

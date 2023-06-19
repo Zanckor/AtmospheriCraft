@@ -1,0 +1,22 @@
+modLoader="javafml" #mandatory
+loaderVersion="[46,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All Rights Reserved"
+[[mods]] #mandatory
+modId="atmosphericraft" #mandatory
+version="${file.jarVersion}" #mandatory
+displayName="AtmospheriCraft" #mandatory
+description='''
+
+'''
+[[dependencies.atmosphericraft]] #optional
+   modId="forge" #mandatory
+   mandatory=true #mandatory
+   versionRange="[46,)" #mandatory
+   ordering="NONE"
+   side="BOTH"
+[[dependencies.atmosphericraft]]
+   modId="minecraft"
+   mandatory=true
+   versionRange="[1.20,1.21)"
+   ordering="NONE"
+   side="BOTH"
