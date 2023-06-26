@@ -1,4 +1,4 @@
-package dev.zanckor.atmosphericraft.common.item.food;
+package dev.zanckor.atmosphericraft.core.item.food;
 
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;

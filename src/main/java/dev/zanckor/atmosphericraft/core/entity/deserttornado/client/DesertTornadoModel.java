@@ -1,11 +1,8 @@
-package dev.zanckor.atmosphericraft.common.entity.deserttornado.client;
+package dev.zanckor.atmosphericraft.core.entity.deserttornado.client;
 
-import dev.zanckor.atmosphericraft.common.entity.deserttornado.server.DesertTornadoEntity;
-import net.minecraft.client.renderer.RenderType;
+import dev.zanckor.atmosphericraft.core.entity.deserttornado.server.DesertTornadoEntity;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
-import software.bernie.geckolib.model.DefaultedGeoModel;
-import software.bernie.geckolib.model.GeoModel;
 
 import static dev.zanckor.atmosphericraft.AtmospheriCraft.MOD_ID;
 

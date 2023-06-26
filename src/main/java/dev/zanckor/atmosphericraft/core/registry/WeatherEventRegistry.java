@@ -1,4 +1,4 @@
-package dev.zanckor.atmosphericraft.registry;
+package dev.zanckor.atmosphericraft.core.registry;
 
 import dev.zanckor.atmosphericraft.api.enuminterface.EnumWeatherEvent;
 import dev.zanckor.atmosphericraft.api.registry.WeatherTemplateRegistry;

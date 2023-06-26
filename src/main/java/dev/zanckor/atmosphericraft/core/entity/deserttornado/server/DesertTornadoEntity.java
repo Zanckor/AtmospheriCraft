@@ -1,4 +1,4 @@
-package dev.zanckor.atmosphericraft.common.entity.deserttornado.server;
+package dev.zanckor.atmosphericraft.core.entity.deserttornado.server;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;

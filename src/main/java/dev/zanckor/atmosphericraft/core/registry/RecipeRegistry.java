@@ -1,10 +1,7 @@
-package dev.zanckor.atmosphericraft.registry;
+package dev.zanckor.atmosphericraft.core.registry;
 
-import dev.zanckor.atmosphericraft.common.recipe.FreezeRecipe;
-import net.minecraft.ResourceLocationException;
-import net.minecraft.resources.ResourceLocation;
+import dev.zanckor.atmosphericraft.core.recipe.FreezeRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

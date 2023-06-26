@@ -1,6 +1,6 @@
-package dev.zanckor.atmosphericraft.common.entity;
+package dev.zanckor.atmosphericraft.core.entity;
 
-import dev.zanckor.atmosphericraft.common.entity.deserttornado.server.DesertTornadoEntity;
+import dev.zanckor.atmosphericraft.core.entity.deserttornado.server.DesertTornadoEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;

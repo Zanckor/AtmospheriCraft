@@ -1,6 +1,7 @@
 package dev.zanckor.atmosphericraft.api.enuminterface;
 
-import dev.zanckor.atmosphericraft.api.weaterevent.SandyBlizzard;
+import dev.zanckor.atmosphericraft.api.chunkmanager.enumdata.BiomeTemperature.WarmBiome;
+import dev.zanckor.atmosphericraft.api.weatherevent.SandStorm;
 import dev.zanckor.atmosphericraft.api.chunkmanager.enumdata.BiomeTemperature.HotBiome;
 
 import java.util.Arrays;
@@ -21,8 +22,8 @@ public enum EnumWeatherEvent {
     VOLCANIC_STORM;
      */
 
-    SANDY_BLIZZARD(new SandyBlizzard(),
-            Arrays.asList(HotBiome.DESERT, HotBiome.ERODED_BADLANDS, HotBiome.BADLANDS));
+    SANDSTORM(new SandStorm(),
+            Arrays.asList(HotBiome.DESERT, HotBiome.ERODED_BADLANDS, HotBiome.BADLANDS, WarmBiome.SAVANNA));
 
     AbstractWeatherEvent weatherEvent;
     List<Enum> biomeTypeList;

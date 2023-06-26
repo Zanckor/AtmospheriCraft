@@ -1,4 +1,4 @@
-package dev.zanckor.atmosphericraft.common.recipe;
+package dev.zanckor.atmosphericraft.core.recipe;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;

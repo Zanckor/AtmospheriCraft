@@ -3,12 +3,10 @@ package dev.zanckor.atmosphericraft.common.util;
 import dev.zanckor.atmosphericraft.api.database.LocateHash;
 import dev.zanckor.atmosphericraft.api.chunkmanager.FakeChunk;
 import dev.zanckor.atmosphericraft.api.chunkmanager.enumdata.BiomeTemperature;
-import dev.zanckor.atmosphericraft.common.recipe.FreezeRecipe;
+import dev.zanckor.atmosphericraft.core.recipe.FreezeRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -24,6 +22,7 @@ import java.util.*;
 import java.util.stream.StreamSupport;
 
 import static dev.zanckor.atmosphericraft.api.chunkmanager.enumdata.BiomeTemperature.TEMPERED;
+import static dev.zanckor.atmosphericraft.common.util.Mathematic.intBetween;
 
 public class MCUtil {
     public static List<Class> biomeTemperatureClasses = Arrays.asList(BiomeTemperature.FrozenBiome.class, BiomeTemperature.ColdBiome.class, BiomeTemperature.TemperedBiome.class, BiomeTemperature.WarmBiome.class, BiomeTemperature.HotBiome.class);
@@ -120,17 +119,6 @@ public class MCUtil {
         return cookedItemStack;
     }
 
-
-    public static boolean randomBoolean(float successPercent) {
-        float random = Mth.randomBetween(RandomSource.create(), 0, 100);
-
-        return random < successPercent;
-    }
-
-    public static boolean intBetween(int min, int max, int number) {
-        return number > min && number < max;
-    }
-
     public static Entity getEntityByUUID(ServerLevel level, UUID uuid) {
         for (Entity entity : level.getAllEntities()) {
             if (entity.getUUID().equals(uuid)) return entity;
@@ -185,6 +173,7 @@ public class MCUtil {
 
         return fakeChunkList;
     }
+
 
     public static void summonItemEntity(ServerLevel level, ItemEntity itemEntity, ItemStack itemStack) {
         level.addFreshEntity(new ItemEntity(level,

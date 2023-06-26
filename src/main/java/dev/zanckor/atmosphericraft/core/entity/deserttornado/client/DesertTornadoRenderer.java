@@ -1,15 +1,14 @@
-package dev.zanckor.atmosphericraft.common.entity.deserttornado.client;
+package dev.zanckor.atmosphericraft.core.entity.deserttornado.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import dev.zanckor.atmosphericraft.common.entity.deserttornado.server.DesertTornadoEntity;
+import dev.zanckor.atmosphericraft.core.entity.deserttornado.server.DesertTornadoEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.GeoBone;
-import software.bernie.geckolib.model.data.EntityModelData;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 import static dev.zanckor.atmosphericraft.AtmospheriCraft.MOD_ID;

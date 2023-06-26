@@ -6,6 +6,7 @@ import dev.zanckor.atmosphericraft.common.util.MCUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class FakeChunk {
     private int temperature = 50;
@@ -13,6 +14,7 @@ public class FakeChunk {
     private BlockPos blockPos;
     private AbstractWeatherEvent weatherEvent;
     private ServerLevel level;
+    public WindSpeed windSpeed;
 
 
     public FakeChunk(BlockPos blockPos, ServerLevel level) {
@@ -38,9 +40,14 @@ public class FakeChunk {
         isAbleToGenerateWeatherEvent = ableToGenerateWeatherEvent;
     }
 
+    public BlockPos getBlockPos() {
+        return blockPos;
+    }
+
     public AbstractWeatherEvent getWeatherEvent() {
         return weatherEvent;
     }
+
 
     public void setWeatherEvent(){
         for(EnumWeatherEvent event : EnumWeatherEvent.values()){
@@ -52,9 +59,5 @@ public class FakeChunk {
 
     public void setWeatherEvent(AbstractWeatherEvent weatherEvent){
         this.weatherEvent = weatherEvent;
-    }
-
-    public BlockPos getBlockPos() {
-        return blockPos;
     }
 }

@@ -1,6 +1,6 @@
-package dev.zanckor.atmosphericraft.registry;
+package dev.zanckor.atmosphericraft.core.registry;
 
-import dev.zanckor.atmosphericraft.common.item.food.FrozenFood;
+import dev.zanckor.atmosphericraft.core.item.food.FrozenFood;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -10,8 +10,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import static dev.zanckor.atmosphericraft.AtmospheriCraft.MOD_ID;
-import static dev.zanckor.atmosphericraft.registry.ItemRegistry.FoodRegistry.FOOD_ITEMS;
-import static dev.zanckor.atmosphericraft.registry.ItemRegistry.MineralRegistry.MINERAL_ITEMS;
+import static dev.zanckor.atmosphericraft.core.registry.ItemRegistry.FoodRegistry.FOOD_ITEMS;
+import static dev.zanckor.atmosphericraft.core.registry.ItemRegistry.MineralRegistry.MINERAL_ITEMS;
 
 public class ItemRegistry {
     public static class FoodRegistry {

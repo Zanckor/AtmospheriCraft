@@ -3,7 +3,6 @@ package dev.zanckor.atmosphericraft.common.event;
 import dev.zanckor.atmosphericraft.api.chunkmanager.FakeChunk;
 import dev.zanckor.atmosphericraft.api.database.LocateHash;
 import dev.zanckor.atmosphericraft.common.customevent.CustomEventHandler;
-import dev.zanckor.atmosphericraft.common.customevent.PlayerChangeChunkEvent;
 import dev.zanckor.atmosphericraft.common.customevent.PlayerOnBiomeEvent;
 import dev.zanckor.atmosphericraft.server.capability.player.PlayerData;
 import dev.zanckor.atmosphericraft.server.capability.player.PlayerDataProvider;
@@ -11,6 +10,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -40,15 +40,13 @@ public class PlayerEventHandler {
     }
 
     @SubscribeEvent
-    public static void applyWeatherEventEffects(PlayerChangeChunkEvent e) {
-        final Player PLAYER = e.getEntity();
+    public static void applyWeatherEventEffects(TickEvent.PlayerTickEvent e) {
+        final Player PLAYER = e.player;
         final Level LEVEL = PLAYER.level();
-        final FakeChunk FAKE_CHUNK = LocateHash.getFakeChunk(e.getLevelChunk().getPos());
+        final FakeChunk FAKE_CHUNK = LocateHash.getFakeChunk(PLAYER.chunkPosition());
 
-        System.out.println(FAKE_CHUNK.getWeatherEvent() == null);
-
-        if (FAKE_CHUNK.isAbleToGenerateWeatherEvent() && FAKE_CHUNK.getWeatherEvent() != null) {
-            FAKE_CHUNK.getWeatherEvent().handler(LEVEL, PLAYER);
+        if (FAKE_CHUNK != null && FAKE_CHUNK.getWeatherEvent() != null) {
+            FAKE_CHUNK.getWeatherEvent().playerHandler(LEVEL, PLAYER);
         }
     }
 }
