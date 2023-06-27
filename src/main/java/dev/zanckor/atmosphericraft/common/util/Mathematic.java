@@ -4,14 +4,12 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import org.apache.commons.lang3.Range;
 
-import java.text.DecimalFormat;
-
 public class Mathematic {
 
-    public static boolean numberBetween(float number, float min, float max){
+    public static boolean numberBetween(float number, float min, float max) {
         Range<Float> range = Range.between(min, max);
 
-        if(range.contains(number)) return true;
+        if (range.contains(number)) return true;
 
         return false;
     }
@@ -56,10 +54,12 @@ public class Mathematic {
 
         return Math.sqrt((x2 - x1) * (x2 - x1));
     }
+
     public static double yDistance(double y1, double y2) {
 
         return Math.sqrt((y2 - y1) * (y2 - y1));
     }
+
     public static double zDistance(double z1, double z2) {
 
         return Math.sqrt((z2 - z1) * (z2 - z1));

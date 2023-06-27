@@ -1,16 +1,13 @@
 package dev.zanckor.atmosphericraft.client.particle;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import dev.zanckor.atmosphericraft.api.database.LocateHash;
 import dev.zanckor.atmosphericraft.common.util.Mathematic;
 import dev.zanckor.atmosphericraft.core.CustomParticleRenderType;
 import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -47,8 +44,8 @@ public class SandstormDust extends TextureSheetParticle {
         super.tick();
     }
 
-    private void increaseSize(){
-        if(quadSize < maxSize){
+    private void increaseSize() {
+        if (quadSize < maxSize) {
             quadSize += maxSize / 100;
         }
     }
@@ -59,9 +56,13 @@ public class SandstormDust extends TextureSheetParticle {
                 xRot, yRot, zRot);
     }
 
+
+    /**
+     * Custom render particle - Rotates in x and z angles, but yRotation, so will always look forward, not upward.
+     */
     public void renderParticle(VertexConsumer vertexConsumer, Camera camera, float partialTicks,
                                float xRotation, float yRotation, float zRotation) {
-        for(int side = 0; side < 1; side++) {
+        for (int side = 0; side < 1; side++) {
             Vec3 vec3 = camera.getPosition();
             float xPos = (float) (Mth.lerp(partialTicks, this.xo, this.x) - vec3.x());
             float yPos = (float) (Mth.lerp(partialTicks, this.yo, this.y) - vec3.y());

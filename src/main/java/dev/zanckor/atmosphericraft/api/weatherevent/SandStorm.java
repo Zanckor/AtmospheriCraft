@@ -33,7 +33,7 @@ public class SandStorm extends AbstractWeatherEvent {
         //Adds wind movement to player
         player.addDeltaMovement(FAKE_CHUNK.windSpeed.winSpeedToVec3());
 
-        //TODO: USAR ESTO PARA CHECAR SI ESTÁ BAJO EL SUELO
+        //TODO: Use this to check if player is above floor. F.e Caves, houses...
         //System.out.println(level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, player.blockPosition()));
     }
 

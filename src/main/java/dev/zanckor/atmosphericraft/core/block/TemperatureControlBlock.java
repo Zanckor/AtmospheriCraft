@@ -16,6 +16,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
+import static dev.zanckor.atmosphericraft.api.database.TemperatureControlEnum.NONE;
+
 public class TemperatureControlBlock extends Block {
     TemperatureControlEnum controlTemperatureEnum;
     public static final BooleanProperty WORKING_STATUS = BooleanProperty.create("working_status");
@@ -41,10 +43,12 @@ public class TemperatureControlBlock extends Block {
 
         System.out.println(fakeChunk.getTemperature());
 
-        //If working status is on, change chunk temperature
-        fakeChunk.changeTemperatureControlEnum(blockState.getValue(WORKING_STATUS) ? controlTemperatureEnum : null);
+        //If working status is on, change chunk temperature based on controlTemperatureEnum
+        fakeChunk.changeTemperatureControlEnum(blockState.getValue(WORKING_STATUS) ? controlTemperatureEnum : NONE);
+        LocateHash.putChunkHashMap(CHUNK_POS, fakeChunk);
 
-        System.out.println(LocateHash.getFakeChunk(CHUNK_POS).getTemperature());
+
+        System.out.println(fakeChunk.getTemperature());
 
         return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
     }

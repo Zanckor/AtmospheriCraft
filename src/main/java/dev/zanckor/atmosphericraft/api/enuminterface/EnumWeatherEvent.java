@@ -9,6 +9,8 @@ import java.util.List;
 
 public enum EnumWeatherEvent {
 
+    //TODO: Weather events are still not done
+
     /*
     INTENSE_RAIN,
     RADIOACTIVE_RAIN,

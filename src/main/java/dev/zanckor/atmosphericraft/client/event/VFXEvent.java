@@ -15,6 +15,10 @@ import net.minecraftforge.fml.common.Mod;
 
 import static dev.zanckor.atmosphericraft.AtmospheriCraft.MOD_ID;
 
+/**
+ * Class used specifically to execute VFX effects as FOG, SkyColor...
+ */
+
 @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class VFXEvent {
     static SkyColor previousSkyColor = new SkyColor(0.7F, 0.7F, 1.0F);
@@ -44,7 +48,8 @@ public class VFXEvent {
     public static void changeSkyColor(ViewportEvent.ComputeFogColor e) {
         final FakeChunk FAKE_CHUNK = LocateHash.getFakeChunk(e.getCamera().getEntity().chunkPosition());
 
-        //TODO: Opcion para quitar lag, si está activo cambiar al instante, no smooth
+        //TODO: Add option to reduce lag - If player want it to be smooth will consume more
+        //TODO: Clean this code, is pretty dirty :P
 
         if (FAKE_CHUNK != null) {
             final SkyColor SKY_COLOR = (FAKE_CHUNK.getWeatherEvent() != null) ? FAKE_CHUNK.getWeatherEvent().getSkyColor() : new SkyColor(e.getRed(), e.getGreen(), e.getBlue());

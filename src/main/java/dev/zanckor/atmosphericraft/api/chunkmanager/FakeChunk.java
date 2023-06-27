@@ -7,6 +7,13 @@ import dev.zanckor.atmosphericraft.common.util.MCUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 
+import static dev.zanckor.atmosphericraft.api.database.TemperatureControlEnum.NONE;
+
+/**
+ * Custom class for reduce lag. <p>
+ * Instead of loading each chunk when trying to get data with Level#getChunk, copy the data useful of each chunk so when dev accessing to it, the server lag will considerable recude
+ */
+
 public class FakeChunk {
     private int temperature;
     private boolean isAbleToGenerateWeatherEvent = false;
@@ -14,7 +21,7 @@ public class FakeChunk {
     private AbstractWeatherEvent weatherEvent;
     private ServerLevel level;
     public WindSpeed windSpeed;
-    private TemperatureControlEnum temperatureControlEnum;
+    private TemperatureControlEnum temperatureControlEnum = NONE;
 
 
     public FakeChunk(BlockPos blockPos, ServerLevel level) {
@@ -29,6 +36,8 @@ public class FakeChunk {
         switch (temperatureControlEnum) {
             case TO_COOLER -> temperature -= 20;
             case TO_HOTTER -> temperature += 20;
+
+            default -> System.out.println("A");
         }
 
         return temperature;
@@ -55,10 +64,15 @@ public class FakeChunk {
     }
 
 
+    /**
+     * Apply a weather event whenever this method is called. <p>
+     * This is only used for applying weather event in this chunk, not surrounding.
+     */
+
     public void setWeatherEvent() {
-        for (EnumWeatherEvent event : EnumWeatherEvent.values()) {
-            if (event.getBiomeTypeList().contains(MCUtil.getBiomeEnum(level, blockPos))) {
-                weatherEvent = event.getWeatherEvent();
+        for (EnumWeatherEvent weatherEvent : EnumWeatherEvent.values()) {
+            if (weatherEvent.getBiomeTypeList().contains(MCUtil.getBiomeEnum(level, blockPos))) {
+                this.weatherEvent = weatherEvent.getWeatherEvent();
             }
         }
     }

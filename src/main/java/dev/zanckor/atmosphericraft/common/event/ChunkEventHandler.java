@@ -38,6 +38,9 @@ public class ChunkEventHandler {
     static ConcurrentHashMap<ChunkPos, Integer> weatherEventLifeTime = new ConcurrentHashMap<>();
     static final RandomSource RANDOM_SOURCE = RandomSource.create();
 
+    /**
+     * Weather Controll related events, as start/finish weather event, or expand weather event chunks
+     */
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public class weatherController {
@@ -76,8 +79,6 @@ public class ChunkEventHandler {
                             startWeatherEvent(level, chunk.getBlockPos(), new ChunkPos(chunk.getBlockPos()), 20, 1, fakeChunk);
                         }
                     });
-
-                    //level.setBlockAndUpdate(new BlockPos(fakeChunk.getBlockPos().getX(), 100, fakeChunk.getBlockPos().getZ()), Blocks.RED_CONCRETE.defaultBlockState());
                 }
             }
         }
@@ -128,8 +129,6 @@ public class ChunkEventHandler {
                             LocateHash.putChunkHashMap(new ChunkPos(fakeChunk.getBlockPos()), fakeChunk);
                             weatherEventLifeTime.remove(chunkPos);
                             fakeChunk.setWeatherEvent(null);
-
-                            //e.level.setBlock(new BlockPos(fakeChunk.getBlockPos().getX(), 100, fakeChunk.getBlockPos().getZ()), Blocks.BLUE_CONCRETE.defaultBlockState(), 1);
                         }
                     }
                 }
@@ -137,11 +136,9 @@ public class ChunkEventHandler {
         }
 
         /*
-
         @SubscribeEvent
         public static void applyWeatherEventEffects(TickEvent.LevelTickEvent e) {
             if (weatherEventLifeTime != null && !weatherEventLifeTime.isEmpty()) {
-
 
                 weatherEventLifeTime.keySet().forEach(chunkPos -> {
                     final FakeChunk FAKE_CHUNK = LocateHash.getFakeChunk(chunkPos);
@@ -155,6 +152,10 @@ public class ChunkEventHandler {
          */
     }
 
+
+    /**
+     * Chunk Controll related events, as asign FakeChunk data on loading chunk, create FakeChunks...
+     */
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public class chunkController {
@@ -213,6 +214,7 @@ public class ChunkEventHandler {
             }
         }
     }
+
 
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)

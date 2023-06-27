@@ -16,14 +16,22 @@ import java.util.UUID;
 
 import static dev.zanckor.atmosphericraft.AtmospheriCraft.MOD_ID;
 
+/**
+ * Class made to manage custom events
+ */
+
 @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CustomEventHandler {
     static HashMap<UUID, ChunkPos> playerChunkPos = new HashMap<>();
     public static HashMap<UUID, Integer> playerTemperature = new HashMap<>();
 
+
+    /**
+     * When player changes chunk, execute PlayerChangeChunkEvent
+     */
     @SubscribeEvent
     public static void onPlayerChangeChunk(PlayerEvent e) {
-        if (e.getEntity() == null) return;
+        if (e.getEntity() == null || !e.getEntity().isAddedToWorld()) return;
 
         Player player = e.getEntity();
         UUID playerUUID = player.getUUID();
@@ -31,10 +39,17 @@ public class CustomEventHandler {
 
         if (!playerChunkPos.containsKey(playerUUID) || !playerChunkPos.get(playerUUID).equals(currentPos)) {
             if (!playerChunkPos.containsKey(playerUUID)) playerChunkPos.put(playerUUID, player.chunkPosition());
-            runEvent(player);
+
+            PlayerChangeChunkEvent event = new PlayerChangeChunkEvent(player);
+            playerChunkPos.replace(player.getUUID(), player.chunkPosition());
+            MinecraftForge.EVENT_BUS.post(event);
         }
     }
 
+    /**
+     * Depending on what biome temperature player is in, execute his event. <p>
+     * By default is Tempered biome, cz if its an error player won't receive damage.
+     */
     @SubscribeEvent
     public static void playerOnBiomeEvent(TickEvent.PlayerTickEvent e) {
         if (e.player == null || playerTemperature.get(e.player.getUUID()) == null) return;
@@ -51,14 +66,5 @@ public class CustomEventHandler {
         }
 
         MinecraftForge.EVENT_BUS.post(biomeEvent);
-    }
-
-
-    public static void runEvent(Player player) {
-        if (player.isAddedToWorld()) {
-            PlayerChangeChunkEvent event = new PlayerChangeChunkEvent(player);
-            playerChunkPos.replace(player.getUUID(), player.chunkPosition());
-            MinecraftForge.EVENT_BUS.post(event);
-        }
     }
 }

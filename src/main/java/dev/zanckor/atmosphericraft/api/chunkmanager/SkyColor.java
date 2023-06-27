@@ -1,6 +1,7 @@
 package dev.zanckor.atmosphericraft.api.chunkmanager;
 
-import net.minecraft.world.phys.Vec3;
-
+/**
+ * Record class for sky color management
+ */
 public record SkyColor(float red, float green, float blue) {
 }

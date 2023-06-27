@@ -33,12 +33,16 @@ public class PlayerEventHandler {
 
         //Only run if temperature is considered HOT, it may not if there is any meteorological phenomenon or its night
         if (PLAYER_TEMPERATURE > HOT.getMinTemperature() && !PLAYER.isDeadOrDying()) {
-            //TODO: Solo aplicar el efecto de sofocación si va sin un equipo adecuado
+            //TODO: Apply suffocation effect just if player has no adequate equipment
             PLAYER_DATA.addSuffocation(0.1f);
             PLAYER.addEffect(new MobEffectInstance(MobEffects.HUNGER, 20, 0));
         }
     }
 
+
+    /**
+     * Applies different effects via calling WeatherEvent#playerHandler
+     */
     @SubscribeEvent
     public static void applyWeatherEventEffects(TickEvent.PlayerTickEvent e) {
         final Player PLAYER = e.player;
