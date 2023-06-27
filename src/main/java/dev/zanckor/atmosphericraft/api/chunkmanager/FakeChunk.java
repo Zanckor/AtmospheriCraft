@@ -36,8 +36,6 @@ public class FakeChunk {
         switch (temperatureControlEnum) {
             case TO_COOLER -> temperature -= 20;
             case TO_HOTTER -> temperature += 20;
-
-            default -> System.out.println("A");
         }
 
         return temperature;

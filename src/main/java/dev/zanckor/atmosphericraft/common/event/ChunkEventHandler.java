@@ -18,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.ChunkEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -241,7 +242,15 @@ public class ChunkEventHandler {
                 //Then cook or froze item if age is greater than 200, and it is in correct temperature
                 ITEM_ENTITY_LIST.stream().filter(entity -> {
                     ItemEntity itemEntity = (ItemEntity) entity;
-                    return itemEntity.isAddedToWorld() && itemEntity.getAge() <= 400;
+
+                    //Check if is 10 blocks from the nearest player. So we wont event check if is far away
+                    //Check also if its in floor or undercaves, only cook if its not underfloor.
+                    //We reduce FLOOR_Y_LEVEL in 5 so player can have a little failure level, even if its a few blocks above floor it will work.
+                    final double DISTANCE_TO_NEAREST_PlAYER = itemEntity.distanceTo(SERVER_LEVEL.getNearestPlayer(itemEntity, 0));
+                    final int FLOOR_Y_LEVEL = SERVER_LEVEL.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, itemEntity.blockPosition()).getY() - 5;
+
+
+                    return itemEntity.isAddedToWorld() && itemEntity.getAge() <= 400 && DISTANCE_TO_NEAREST_PlAYER < 10 && itemEntity.getY() >= FLOOR_Y_LEVEL;
                 }).forEach(entity -> {
                     final ItemEntity ITEM_ENTITY = (ItemEntity) entity;
                     final int BIOME_TEMPERATURE = LocateHash.getFakeChunk(ITEM_ENTITY.chunkPosition()).getTemperature();
@@ -249,8 +258,9 @@ public class ChunkEventHandler {
                     final Entity NEAREST_ITEM = MCUtil.getNearestEntity(entity, MCUtil.getAllItemEntities(SERVER_LEVEL));
                     final float DISTANCE_TO_NEAREST_ITEM = NEAREST_ITEM != null ? ITEM_ENTITY.distanceTo(NEAREST_ITEM) : 9;
 
+
                     //When 10 seconds has elapsed, turn it into his cooked/frozen item
-                    //Only if nearest item is 20 blocks away
+                    //Only if nearest item is 8 blocks away
                     if (ITEM_ENTITY.getAge() > 200 && ENUM_CONDITIONS.contains(BIOME_TYPE) && DISTANCE_TO_NEAREST_ITEM > 8) {
 
                         ItemStack resultingItem = switch (BIOME_TYPE) {

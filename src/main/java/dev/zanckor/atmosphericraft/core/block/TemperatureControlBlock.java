@@ -41,14 +41,10 @@ public class TemperatureControlBlock extends Block {
         FakeChunk fakeChunk = LocateHash.getFakeChunk(CHUNK_POS);
         blockState.setValue(WORKING_STATUS, !blockState.getValue(WORKING_STATUS));
 
-        System.out.println(fakeChunk.getTemperature());
-
         //If working status is on, change chunk temperature based on controlTemperatureEnum
         fakeChunk.changeTemperatureControlEnum(blockState.getValue(WORKING_STATUS) ? controlTemperatureEnum : NONE);
         LocateHash.putChunkHashMap(CHUNK_POS, fakeChunk);
 
-
-        System.out.println(fakeChunk.getTemperature());
 
         return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
