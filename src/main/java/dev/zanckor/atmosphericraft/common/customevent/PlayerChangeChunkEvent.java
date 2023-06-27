@@ -6,10 +6,6 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
 
-/**
- * This event runs when player changes chunk.
- * It is Dist.DEDICATED_SERVER, won't run in client side
- */
 public class PlayerChangeChunkEvent extends PlayerEvent {
     private final LevelChunk levelChunk;
 

@@ -1,20 +1,20 @@
 package dev.zanckor.atmosphericraft.api.chunkmanager;
 
+import dev.zanckor.atmosphericraft.api.database.TemperatureControlEnum;
 import dev.zanckor.atmosphericraft.api.enuminterface.AbstractWeatherEvent;
 import dev.zanckor.atmosphericraft.api.enuminterface.EnumWeatherEvent;
 import dev.zanckor.atmosphericraft.common.util.MCUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
 public class FakeChunk {
-    private int temperature = 50;
+    private int temperature;
     private boolean isAbleToGenerateWeatherEvent = false;
     private BlockPos blockPos;
     private AbstractWeatherEvent weatherEvent;
     private ServerLevel level;
     public WindSpeed windSpeed;
+    private TemperatureControlEnum temperatureControlEnum;
 
 
     public FakeChunk(BlockPos blockPos, ServerLevel level) {
@@ -25,6 +25,12 @@ public class FakeChunk {
 
 
     public int getTemperature() {
+        //If there is any TemperatureControlBlock, increase or decrease temperature
+        switch (temperatureControlEnum) {
+            case TO_COOLER -> temperature -= 20;
+            case TO_HOTTER -> temperature += 20;
+        }
+
         return temperature;
     }
 
@@ -49,15 +55,19 @@ public class FakeChunk {
     }
 
 
-    public void setWeatherEvent(){
-        for(EnumWeatherEvent event : EnumWeatherEvent.values()){
-            if(event.getBiomeTypeList().contains(MCUtil.getBiomeEnum(level, blockPos))){
+    public void setWeatherEvent() {
+        for (EnumWeatherEvent event : EnumWeatherEvent.values()) {
+            if (event.getBiomeTypeList().contains(MCUtil.getBiomeEnum(level, blockPos))) {
                 weatherEvent = event.getWeatherEvent();
             }
         }
     }
 
-    public void setWeatherEvent(AbstractWeatherEvent weatherEvent){
+    public void setWeatherEvent(AbstractWeatherEvent weatherEvent) {
         this.weatherEvent = weatherEvent;
+    }
+
+    public void changeTemperatureControlEnum(TemperatureControlEnum temperatureControlEnum){
+        this.temperatureControlEnum = temperatureControlEnum;
     }
 }

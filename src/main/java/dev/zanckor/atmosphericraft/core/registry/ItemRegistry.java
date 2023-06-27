@@ -10,6 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import static dev.zanckor.atmosphericraft.AtmospheriCraft.MOD_ID;
+import static dev.zanckor.atmosphericraft.core.registry.ItemRegistry.BlockRegistry.BLOCK_ITEMS;
 import static dev.zanckor.atmosphericraft.core.registry.ItemRegistry.FoodRegistry.FOOD_ITEMS;
 import static dev.zanckor.atmosphericraft.core.registry.ItemRegistry.MineralRegistry.MINERAL_ITEMS;
 
@@ -59,6 +60,10 @@ public class ItemRegistry {
                 () -> new Item(new Item.Properties()));
     }
 
+    public static class BlockRegistry{
+        public static final DeferredRegister<Item> BLOCK_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
+    }
+
     public static void addItemsToTab(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey().equals(CreativeModeTabs.FOOD_AND_DRINKS)) {
             FOOD_ITEMS.getEntries().forEach(event::accept);
@@ -67,10 +72,15 @@ public class ItemRegistry {
         if(event.getTabKey().equals(CreativeModeTabs.INGREDIENTS)){
             MINERAL_ITEMS.getEntries().forEach(event::accept);
         }
+
+        if(event.getTabKey().equals(CreativeModeTabs.BUILDING_BLOCKS)) {
+            BLOCK_ITEMS.getEntries().forEach(event::accept);
+        }
     }
 
     public static void register(IEventBus eventBus) {
         FOOD_ITEMS.register(eventBus);
         MINERAL_ITEMS.register(eventBus);
+        BLOCK_ITEMS.register(eventBus);
     }
 }

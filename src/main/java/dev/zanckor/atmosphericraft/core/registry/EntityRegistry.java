@@ -1,4 +1,4 @@
-package dev.zanckor.atmosphericraft.core.entity;
+package dev.zanckor.atmosphericraft.core.registry;
 
 import dev.zanckor.atmosphericraft.core.entity.deserttornado.server.DesertTornadoEntity;
 import net.minecraft.resources.ResourceLocation;

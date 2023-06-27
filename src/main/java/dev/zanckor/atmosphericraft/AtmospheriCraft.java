@@ -2,13 +2,9 @@ package dev.zanckor.atmosphericraft;
 
 import com.mojang.logging.LogUtils;
 import dev.zanckor.atmosphericraft.client.particle.SandstormDust;
-import dev.zanckor.atmosphericraft.core.entity.EntityRegistry;
+import dev.zanckor.atmosphericraft.core.registry.*;
 import dev.zanckor.atmosphericraft.core.entity.deserttornado.client.DesertTornadoRenderer;
 import dev.zanckor.atmosphericraft.core.entity.deserttornado.server.DesertTornadoEntity;
-import dev.zanckor.atmosphericraft.core.registry.ItemRegistry;
-import dev.zanckor.atmosphericraft.core.registry.ParticleRegistry;
-import dev.zanckor.atmosphericraft.core.registry.RecipeRegistry;
-import dev.zanckor.atmosphericraft.core.registry.WeatherEventRegistry;
 import dev.zanckor.atmosphericraft.server.capability.player.PlayerDataProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -26,7 +22,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-import static dev.zanckor.atmosphericraft.core.entity.EntityRegistry.DESERT_TORNADO;
+import static dev.zanckor.atmosphericraft.core.registry.EntityRegistry.DESERT_TORNADO;
 import static dev.zanckor.atmosphericraft.core.registry.ParticleRegistry.SANDSTORM_DUST;
 import static dev.zanckor.atmosphericraft.server.capability.player.PlayerDataProvider.PLAYER_DATA_CAPABILITY;
 
@@ -42,6 +38,7 @@ public class AtmospheriCraft {
         MinecraftForge.EVENT_BUS.register(this);
 
         ItemRegistry.register(modEventBus);
+        BlockRegistry.register(modEventBus);
         RecipeRegistry.register(modEventBus);
         EntityRegistry.register(modEventBus);
         WeatherEventRegistry.register();
